@@ -1,5 +1,4 @@
-# tankoyunu
-#file:///Users/beyzagurbuz/Desktop/WebGL_Codes/6_tank%20game_beta/TankGame.html
+
 "use strict";
 
 var canvas;
@@ -27,6 +26,9 @@ var moveTank_Y_Loc;
 
 var theta = 0.0;
 var thetaLoc;
+
+var theta_ = 0.0;
+
 
 var vertexElem;
 var vertexShader;
@@ -79,6 +81,16 @@ function keyFunction(event)
         Move_Missile_Y = 0.0; 
         fireMissile = 0;
 	}
+    if(KeyCode == "KeyT") // Rotate Tank Right (CW)  
+	{
+		theta_ -= 0.03;
+	}
+	
+	if(KeyCode == "KeyY") // Move Tank  
+	{
+		theta_ -= 0.03;
+
+	}
 }
 			
 
@@ -127,17 +139,19 @@ function render()
 	
 	let sin_t = Math.sin(theta);
     let cos_t = Math.cos(theta);
+    let sin_turret = Math.sin(theta_);
+    let cos_turret = Math.cos(theta_);
 	
-    let Missile_Direction_x =  Missile_Direction_X * cos_t - Missile_Direction_Y * sin_t ;
-    let Missile_Direction_y =  Missile_Direction_X * sin_t + Missile_Direction_Y * cos_t ;
+    let Missile_Direction_x =  Missile_Direction_X * cos_turret - Missile_Direction_Y * sin_turret;
+    let Missile_Direction_y =  Missile_Direction_X * sin_turret + Missile_Direction_Y * cos_turret ;
 	
 	if(MoveTank == 1)
 	{ 
-		centerTank_X += Missile_Direction_x;   
-		centerTank_Y += Missile_Direction_y;  
+		centerTank_X += Missile_Direction_X * cos_t - Missile_Direction_Y * sin_t; 
+		centerTank_Y += Missile_Direction_X * sin_t+ Missile_Direction_Y * cos_t ; 
 		
-		moveTank_X += Missile_Direction_x; 
-		moveTank_Y += Missile_Direction_y; 
+		moveTank_X += Missile_Direction_X * cos_t - Missile_Direction_Y * sin_t; 
+		moveTank_Y += Missile_Direction_X * sin_t+ Missile_Direction_Y * cos_t ;
 	}  
 	
 
@@ -202,7 +216,7 @@ function render()
     gl.enableVertexAttribArray(positionLoc_2);
 
 	thetaLoc = gl.getUniformLocation(program_2, "vTheta");
-    gl.uniform1f(thetaLoc, theta);	
+    gl.uniform1f(thetaLoc, theta_);	
 
 	centerTank_X_Loc = gl.getUniformLocation(program_2, "v_centerTank_X");
     gl.uniform1f(centerTank_X_Loc, centerTank_X);
@@ -240,7 +254,7 @@ function render()
     gl.enableVertexAttribArray(positionLoc_2);
 
 	thetaLoc = gl.getUniformLocation(program_2, "vTheta");
-    gl.uniform1f(thetaLoc, theta);	
+    gl.uniform1f(thetaLoc, theta_);	
 	
 	centerTank_X_Loc = gl.getUniformLocation(program_2, "v_centerTank_X");
     gl.uniform1f(centerTank_X_Loc, centerTank_X);	
