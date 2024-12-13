@@ -83,7 +83,7 @@ function keyFunction(event)
 	}
     if(KeyCode == "KeyT") // Rotate Tank Right (CW)  
 	{
-		theta_ -= 0.03;
+		theta_ += 0.03;
 	}
 	
 	if(KeyCode == "KeyY") // Move Tank  
@@ -139,6 +139,7 @@ function render()
 	
 	let sin_t = Math.sin(theta);
     let cos_t = Math.cos(theta);
+    let totalTurretAngle = theta + theta_;
     let sin_turret = Math.sin(theta_);
     let cos_turret = Math.cos(theta_);
 	
@@ -216,7 +217,7 @@ function render()
     gl.enableVertexAttribArray(positionLoc_2);
 
 	thetaLoc = gl.getUniformLocation(program_2, "vTheta");
-    gl.uniform1f(thetaLoc, theta_);	
+    gl.uniform1f(thetaLoc, totalTurretAngle);	
 
 	centerTank_X_Loc = gl.getUniformLocation(program_2, "v_centerTank_X");
     gl.uniform1f(centerTank_X_Loc, centerTank_X);
@@ -254,7 +255,7 @@ function render()
     gl.enableVertexAttribArray(positionLoc_2);
 
 	thetaLoc = gl.getUniformLocation(program_2, "vTheta");
-    gl.uniform1f(thetaLoc, theta_);	
+    gl.uniform1f(thetaLoc, totalTurretAngle);	
 	
 	centerTank_X_Loc = gl.getUniformLocation(program_2, "v_centerTank_X");
     gl.uniform1f(centerTank_X_Loc, centerTank_X);	
