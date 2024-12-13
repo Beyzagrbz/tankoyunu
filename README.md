@@ -151,8 +151,14 @@ function render()
 		centerTank_X += Missile_Direction_X * cos_t - Missile_Direction_Y * sin_t; 
 		centerTank_Y += Missile_Direction_X * sin_t+ Missile_Direction_Y * cos_t ; 
 		
-		moveTank_X += Missile_Direction_X * cos_t - Missile_Direction_Y * sin_t; 
+	    moveTank_X += Missile_Direction_X * cos_t - Missile_Direction_Y * sin_t; 
 		moveTank_Y += Missile_Direction_X * sin_t+ Missile_Direction_Y * cos_t ;
+        	
+		centerTank_X += Missile_Direction_x; 
+		centerTank_Y += Missile_Direction_y;
+		
+		moveTank_X += Missile_Direction_x; 
+		moveTank_Y += Missile_Direction_y;
 	}  
 	
 
